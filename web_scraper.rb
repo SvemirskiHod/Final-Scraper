@@ -12,7 +12,7 @@ link = "http://www.imdb.com/search/title?genres=history&title_type=feature&sort=
 
 # next_button[0].attributes["href"].value
 
-# root_url = "http://www.imdb.com/search/title"
+root_url = "http://www.imdb.com/search/title"
 
 
 
@@ -39,18 +39,18 @@ def has_next?(link)
   page = HTTParty.get(link)
   parse_page = Nokogiri::HTML(page)
   next_button = parse_page.css('a.lister-page-next.next-page')
-  Pry.start(binding)
-  if next_button[0]
-    true
-  else
-    false
-  end
+  next_button[0]? true : false
 end
 
-# Pry.start(binding)
+
+  button_link = next_button[0].attributes["href"].value
+  link = root_url + button_link
 
 
-# next_button[0].attributes["href"].value != nil
+  Pry.start(binding)
+
+
+next_button[0].attributes["href"].value
 # do
 #   invoke scrape_ids_from_link with initial with link
 
