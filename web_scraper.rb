@@ -11,7 +11,7 @@ all_pages_link = []
 root_url = "http://www.imdb.com/search/title"
 # parse_page.css('.summary_text')[0].children[0].text.strip
 
- # begin
+# begin
   page = HTTParty.get(link)
   parse_page = Nokogiri::HTML(page)
   # Pry.start(binding)
