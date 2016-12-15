@@ -4,7 +4,7 @@ require 'json'
 require 'pry'
 require 'csv'
 
-keywords = []
+exports = {}
 
 root_url = "http://www.imdb.com/title/"
 
@@ -12,9 +12,9 @@ file = File.read("./links.json")
 movie_links = JSON.parse(file)
 # count = 1
 
-# movie_links.each do |link|
+movie_links.each do |link|
 
-  full_link = root_url + "tt3169706"
+  full_link = root_url + link
 
   page = HTTParty.get(full_link)
   parse_page = Nokogiri::HTML(page)
@@ -29,10 +29,16 @@ movie_links = JSON.parse(file)
 
   keywords_on_page = keyword_parse_page.css(".sodatext")
 
+  keywords = []
+
   keywords_on_page.each do |keyword|
-
     keywords <<  keyword.css("a").children.text
-
   end
-  puts keywords
 
+  exports[link] = keywords
+
+end
+
+open('keywords_links.json', 'w') {|f|
+  f << exports.to_json
+}
