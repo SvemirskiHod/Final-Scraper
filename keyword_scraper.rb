@@ -35,7 +35,9 @@ movie_links.each do |link|
     keywords <<  keyword.css("a").children.text
   end
 
-  exports[link] = keywords
+  if keywords.length > 2
+    exports[link] = keywords
+  end
 
 end
 
