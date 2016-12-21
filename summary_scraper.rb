@@ -7,10 +7,11 @@ require 'csv'
 all_pages_summary_text = {}
 root_url = "http://www.imdb.com/title/"
 
-file = File.read("./links.json")
+file = File.read("./summary.json")
 movie_links = JSON.parse(file)
+# Pry.start(binding)
 count = 1
-movie_links.each do |link|
+movie_links.keys.each do |link|
 
   full_link = root_url + link
 
@@ -31,6 +32,6 @@ movie_links.each do |link|
 end
 
   # Pry.start(binding)
-open('summary2.json', 'w') {|f|
+open('summary3.json', 'w') {|f|
   f << all_pages_summary_text.to_json
 }

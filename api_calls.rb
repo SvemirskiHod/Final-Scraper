@@ -30,7 +30,7 @@ begin
   # Pry.start(binding)
   count += 1
   puts count
-end while count < 300
+end while count < 500
 
 # pp exports
 open('api_movie_call.json', 'w') {|f|
